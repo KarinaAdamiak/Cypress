@@ -5,9 +5,20 @@ describe ('my first test',() => {
        
         cy.url().should('eq','https://fabrykatestow.pl/ciekawostki/')
         
-        cy.wait(2000)
-        
+        cy.wait(2000) 
         cy.go('back')
+        
+        cy.wait(2000)
+        cy.go('forward')
+
+        cy.wait(2000) 
+        cy.go(-1)
+
+        cy.wait(2000) 
+        cy.go(1)
+
+        cy.getAllCookies()
+
 
     })
     
