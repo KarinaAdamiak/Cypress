@@ -11,9 +11,11 @@ describe ('my homework cypress test',()=>{
         cy.get('a[href="https://fabrykatestow.pl/cypress"][class="elementor-button-link elementor-button elementor-size-sm elementor-animation-grow"]').click()
     
         cy.get('[class="attachment-large size-large wp-image-2373"]').scrollIntoView()
+        cy.get('[class="elementor-image"]').eq(2).should('be.visible')
+        
         cy.get('[class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-51c8325f"]').screenshot()
         
-        cy.get('[class="elementor-image"]').eq(2).should('be.visible')
+        
         
 
 
