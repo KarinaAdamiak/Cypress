@@ -15,12 +15,30 @@ describe ('my homework cypress test',()=>{
         
         cy.get('[class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-51c8325f"]').screenshot()
         
-        
-        
-
-
     })
 
+})
+const url= 'https://fabrykatestow.pl/' 
 
+describe ('my homework cypress test advanced',()=>{
+    it ('should test HTTP mesthods', function(){
+
+        cy.visit(url)
+        cy.request(url).then((response) => {
+            const body=JSON.stringify(rsponse.body)
+            expect (response.status).to.eq(200)
+            cy.log(body)
+
+        })
+    })
 
 })
+
+
+
+
+ 
+
+
+
+
