@@ -22,5 +22,24 @@ describe ('my first test',() => {
 
     })
     
-    
+    const url= 'https://simpletestsite.fabrykatestow.pl/'
+    const iframeHeader= '#iframe-header'
+    const iframe= 'iframe'
+    const button1= '#simpleButton1'
+
+    })
+    describe('iframe test', ()=>{
+        it('testing iframe',function(){
+            cy.visit(url)
+            const iframeTest= cy.get (iframe)
+            .its('0.contentDokuument.body')
+            .should('be.visible')
+            .then (cy.wrap)
+
+            cy.get(iframeHeader).click()
+
+            iframeTest.find(button).click()
+
+        })
+
     })
