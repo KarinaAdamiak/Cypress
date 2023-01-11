@@ -24,25 +24,29 @@ const url= 'https://jsonplaceholder.typicode.com/posts'
 describe ('my homework cypress test advanced',()=>{
     it ('should test HTTP mesthods', function(){
 
-        cy.visit(url)
-        cy.request(url).then((response) => {
-            const body=JSON.stringify(rsponse.body)
-            expect (response.status).to.eq(200)
-            cy.log(body)
+    cy.request(url).then((response) => {
+    const body=JSON.stringify(rsponse.body)
+    expect (response.status).to.eq(200)
+    cy.log(body)
 
             cy.request ({
                 method: PUT,
                 url: url,
                 body: JASON.stringify({
-                    title:'My Put method',
-                    body: 'My put method should work',
-                    userId: 1
-                }),
+                    {
+                        userId: 1,
+                        id: 1,
+                        title: 'make the difference',
+                        body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit CYPRESS molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
+                      }
+                ),
                 headers: {'Content-type': 'application/Jason'}
             }
         ).then((response)=>{
-            const body=JASON.stringify(response.body)
-            cy.log(body)
+            expect(response.status).to.eq(200)
+            expect(response.body.data).has.property('title','make the difference')
+            expect(response.body.data).has.property(' body', 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit CYPRESS molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto')
+        
         })
     })
 
@@ -54,5 +58,4 @@ describe ('my homework cypress test advanced',()=>{
  
 
 
-
-
+})
