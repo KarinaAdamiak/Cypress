@@ -1,3 +1,4 @@
+const { contentType } = require("mime-types")
 
 
 describe ('my homework cypress test',()=>{
@@ -18,7 +19,7 @@ describe ('my homework cypress test',()=>{
     })
 
 })
-const url= 'https://fabrykatestow.pl/' 
+const url= 'https://jsonplaceholder.typicode.com/posts' 
 
 describe ('my homework cypress test advanced',()=>{
     it ('should test HTTP mesthods', function(){
@@ -29,6 +30,19 @@ describe ('my homework cypress test advanced',()=>{
             expect (response.status).to.eq(200)
             cy.log(body)
 
+            cy.request ({
+                method: PUT,
+                url: url,
+                body: JASON.stringify({
+                    title:'My Put method',
+                    body: 'My put method should work',
+                    userId: 1
+                }),
+                headers: {'Content-type': 'application/Jason'}
+            }
+        ).then((response)=>{
+            const body=JASON.stringify(response.body)
+            cy.log(body)
         })
     })
 
