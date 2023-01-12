@@ -1,4 +1,4 @@
-const { contentType } = require("mime-types")
+//const { contentType } = require("mime-types")
 
 
 describe ('my homework cypress test',()=>{
@@ -19,43 +19,58 @@ describe ('my homework cypress test',()=>{
     })
 
 })
-const url= 'https://jsonplaceholder.typicode.com/posts' 
+//Advanced homework(Module 6)
+const url= 'https://jsonplaceholder.typicode.com/posts/1' 
+const url2='https://jsonplaceholder.typicode.com/posts/2'
 
-describe ('my homework cypress test advanced',()=>{
-    it ('should test HTTP mesthods', function(){
-
+describe ('put and delete scenario- advanced test',()=>{
+    it ('should test HTTP method:PUT', function(){
+//GET(DOMYŚLNA)
     cy.request(url).then((response) => {
-    const body=JSON.stringify(rsponse.body)
+    const body=JSON.stringify(response.body)   //żeby nie był array-->powstaje string
     expect (response.status).to.eq(200)
-    cy.log(body)
-
-            cy.request ({
-                method: PUT,
+    cy.log(response.body)
+    })
+    cy.request({
+                method: 'PUT',
                 url: url,
-                body: JASON.stringify({
-                    {
-                        userId: 1,
-                        id: 1,
+                body: ({
                         title: 'make the difference',
-                        body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit CYPRESS molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
-                      }
-                ),
-                headers: {'Content-type': 'application/Jason'}
-            }
-        ).then((response)=>{
-            expect(response.status).to.eq(200)
-            expect(response.body.data).has.property('title','make the difference')
-            expect(response.body.data).has.property(' body', 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit CYPRESS molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto')
-        
-        })
+                        body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit CYPRESS molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+                        userId: 1,
+                    }),
+                headers: {'Content-type': 'application/Json'}
+    }
+
+    ).then ((response)=>{
+        const body=JSON.stringify(response.body)
+        expect(response.status).to.eq(200)
+        expect(body).to.include('make the difference')
+        expect(body).to.contain('CYPRESS')
+    })
+    
     })
 
-})
-
-
-
-
- 
-
-
-})
+   it ('should test HTTP method:DELETE', function(){
+        cy.request(url2).then((response) => {
+            const body=JSON.stringify(response.body)   //żeby nie był array-->powstaje string
+            expect (response.status).to.eq(200)
+            cy.log(response.body)
+        })
+        cy.request({
+            method:'DELETE',
+            url: url2,
+            body:({
+                userId: 1,
+                id: 2,
+                title: 'qui est esse',
+                body: 'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla',
+            }),
+            headers: {'Content-type': 'application/Json'}
+        }
+            ).then((response)=> {
+                const body=JSON.stringify(response.body)
+                expect(response.status).to.eq(200)      
+              //expect(response.status).to.eq(204)  //HTTP Status 204 (No Content) indicates that the server has successfully fulfilled the request and that there is no content to send in the response payload body.
+              //expect(body).not.visible('id: 2')
+   })})})
