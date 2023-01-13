@@ -72,5 +72,5 @@ describe ('put and delete scenario- advanced test',()=>{
                 const body=JSON.stringify(response.body)
                 expect(response.status).to.eq(200)      
               //expect(response.status).to.eq(204)  //HTTP Status 204 (No Content) indicates that the server has successfully fulfilled the request and that there is no content to send in the response payload body.
-              //expect(body).not.visible('id: 2')
+              
    })})})
