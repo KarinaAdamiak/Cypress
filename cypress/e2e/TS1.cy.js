@@ -44,16 +44,48 @@
 
 //     })
     //Kontrolki:Checkbox and Input
-import InputPage from "../page-objects/inputPage"
-import HomePage from "../page-objects/homePage"
-
+import InputPage from "./page-objects/inputPage"
+import HomePage from "./page-objects/homePage"
+import CheckboxPage from "./page-objects/checkboxPage"
+import DropdownListPage from "./page-objects/dropdownListPage"
+import HoversPage from "./page-objects/hoversPage"
 describe ('my first test scenario-a simple web page', ()=> {
+   
+    beforeEach(() =>{
+    cy.visit('/');
+   })
 
     it ('test inputs', function() {
         const homePage= new HomePage();  //adding an object
-        homePage.visitPage()
-        homePage.clickInputsTabs()
+        homePage.clickInputsTab()
 
-    })
+        const inputPage = new InputPage();
+        inputPage.typeNumberIntoField()
+        inputPage.typeLettersIntoField()
     })
 
+    it ('test checkbox', function() {
+        const homePage= new HomePage();  //adding an object
+        homePage.clickCheckboxTab()
+
+        const checkboxPage = new CheckboxPage();
+        checkboxPage.checkFirstCheckbox()
+        checkboxPage.uncheckLastCheckbox()
+    })
+
+    it ('test dropdownList', function() {
+        const homePage= new HomePage();  //adding an object
+        homePage.clickDropDownList
+
+        const dropdownPage = new DropdownListPage()
+        dropdownPage.chooseDropdownListFirstOption()
+
+})
+    it ('test hovers', function() {
+        const homePage= new HomePage();  //adding an object
+        homePage.clickHoversTab()
+
+    const hoversPage = new HoversPage()
+    hoversPage.hoverOverElement()
+})
+})
