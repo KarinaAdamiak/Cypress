@@ -1,54 +1,15 @@
-// describe ('my first test',() => {
-//     it('visit main page and click top menu bottom', function(){
-//         cy.visit('https://fabrykatestow.pl/')
-//         cy.get('#nv-primary-navigation-main').contains('Newsletter').click()
-       
-//         cy.url().should('eq','https://fabrykatestow.pl/ciekawostki/')
-        
-//         cy.wait(2000) 
-//         cy.go('back')
-        
-//         cy.wait(2000)
-//         cy.go('forward')
-
-//         cy.wait(2000) 
-//         cy.go(-1)
-
-//         cy.wait(2000) 
-//         cy.go(1)
-
-//         cy.getAllCookies()
-
-
-//     })
-    
-//     const url= 'https://simpletestsite.fabrykatestow.pl/'
-//     const iframeHeader= '#iframe-header'
-//     const iframe= 'iframe'
-//     const button1= '#simpleButton1'
-
-//     })
-//     describe('iframe test', ()=>{
-//         it('testing iframe',function(){
-//             cy.visit(url)
-//             const iframeTest= cy.get (iframe)
-//             .its('0.contentDokuument.body')
-//             .should('be.visible')
-//             .then (cy.wrap)
-
-//             cy.get(iframeHeader).click()
-
-//             iframeTest.find(button).click()
-
-//         })
-
-//     })
-    //Kontrolki:Checkbox and Input
 import InputPage from "./page-objects/inputPage"
 import HomePage from "./page-objects/homePage"
 import CheckboxPage from "./page-objects/checkboxPage"
 import DropdownListPage from "./page-objects/dropdownListPage"
 import HoversPage from "./page-objects/hoversPage"
+import BasicAuthPage from "./page-objects/basicAuthPage"
+import BasicFormPage from "./page-objects/formPage"
+import KeypressPage from "./page-objects/keypressPage"
+import AddAndRemovePage from "./page-objects/removeAndAddPage"
+import StatusCodesPage from "./page-objects/statusCodePage"
+import IframePage from "./page-objects/iframePage"
+
 describe ('my first test scenario-a simple web page', ()=> {
    
     beforeEach(() =>{
@@ -80,12 +41,60 @@ describe ('my first test scenario-a simple web page', ()=> {
         const dropdownPage = new DropdownListPage()
         dropdownPage.chooseDropdownListFirstOption()
 
-})
+    })
     it ('test hovers', function() {
         const homePage= new HomePage();  //adding an object
         homePage.clickHoversTab()
 
-    const hoversPage = new HoversPage()
-    hoversPage.hoverOverElement()
+        const hoversPage = new HoversPage()
+        hoversPage.hoverOverElement()
+    })
+    it('test basic authorization', function(){
+        const homePage= new HomePage()
+        homePage.clickAuthorizationTab()
+
+        const basicAuthPage= new BasicAuthPage()
+        basicAuthPage.checkBasicAuthoNegative()
+    })
+    it('test fill in the form', function(){
+        const homePage= new HomePage()
+        homePage.clickFormTab()
+
+        const basicFormPage= new BasicFormPage()
+        basicFormPage.checkFormSubmitPositive()
+
+
+    })
+    it('test fill in the keypress input', function(){
+        const homePage= new HomePage()
+        homePage.clickKeypressTab()
+
+        const basicKeypressPage= new KeypressPage()
+        basicKeypressPage.checkKeypressReaction()
+    })
+
+    it('test addins and removing element', function(){
+        const homePage= new HomePage()
+        homePage.clickRemoveAndAddTab()
+    
+        const addAndRemovePage= new AddAndRemovePage()
+        addAndRemovePage.checkAddingElement()
+        addAndRemovePage.checkDeletingElement()
+    })
+    it('test status code', function(){
+        const homePage= new HomePage()
+        homePage.clickStatusCodeTab()
+
+        const statusCode= new StatusCodesPage()
+        statusCode.checkStatusCode200()
+    })
+
+    it('testing iframe',function(){
+        const homePage= new HomePage()
+        homePage.clickIframeTabe()
+
+        const iframe= new IframePage()
+        iframe.checkIframeVisible()
+        
 })
 })
